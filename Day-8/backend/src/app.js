@@ -6,6 +6,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cors());
+app.use(express.static("./public"));
 
 app.post("/api/notes", async (req, res) => {
   const { title, description } = req.body;
@@ -44,6 +45,10 @@ app.patch("/api/notes/:id", async (req, res) => {
   res.status(200).json({
     message: "note description updated...",
   });
+});
+
+app.use("*name", (req, res) => {
+  res.sendFile("/public/index.html");
 });
 
 module.exports = app;
