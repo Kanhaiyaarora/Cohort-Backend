@@ -5,7 +5,7 @@ const App = () => {
   const [notes, setNotes] = useState([]);
 
   function fetchNotes() {
-    axios.get("http://localhost:3000/api/notes").then((res) => {
+    axios.get("https://cohort-backend-fbdj.onrender.com/api/notes").then((res) => {
       setNotes(res.data.notes);
     });
   }
@@ -20,7 +20,7 @@ const App = () => {
     const description = e.target.description.value;
 
     axios
-      .post("http://localhost:3000/api/notes", {
+      .post("https://cohort-backend-fbdj.onrender.com/api/notes", {
         title,
         description,
       })
@@ -33,7 +33,7 @@ const App = () => {
   }
 
   function deleteNoteHandler(noteId) {
-    axios.delete("http://localhost:3000/api/notes/" + noteId).then((res) => {
+    axios.delete("https://cohort-backend-fbdj.onrender.com/api/notes/" + noteId).then((res) => {
       console.log(res.data);
       fetchNotes();
     });
@@ -41,7 +41,7 @@ const App = () => {
 
   function updateNoteHandler(noteId) {
     const newDescription = prompt("Enter New Description...")
-    axios.patch("http://localhost:3000/api/notes/" + noteId, { description: newDescription }).then((res) => {
+    axios.patch("https://cohort-backend-fbdj.onrender.com/api/notes/" + noteId, { description: newDescription }).then((res) => {
       console.log(res.data);
       fetchNotes()
 
