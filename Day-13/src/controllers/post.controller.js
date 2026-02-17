@@ -8,22 +8,6 @@ const imagekit = new imageKit({
 });
 
 async function createPostController(req, res) {
-  const token = req.cookies.token;
-  if (!token) {
-    return res
-      .status(401)
-      .json({ message: "Token not found. Unauthorised access" });
-  }
-
-  let decode = null;
-  try {
-    decode = jwt.verify(token, process.env.JWT_SECRET);
-  } catch (error) {
-    return res
-      .status(401)
-      .json({ message: "token not valid - unauthorised access" });
-  }
-
   const file = await imagekit.files.upload({
     file: await toFile(Buffer.from(req.file.buffer), "file"),
     fileName: "Test",
@@ -43,21 +27,6 @@ async function createPostController(req, res) {
 }
 
 async function getPostController(req, res) {
-  const token = req.cookies.token;
-  if (!token) {
-    return res.status(401).json({
-      message: "unauthorised access",
-    });
-  }
-  let decoded;
-  try {
-    decoded = jwt.verify(token, process.env.JWT_SECRET);
-  } catch (error) {
-    return res.status(401).json({
-      message: "token invalid",
-    });
-  }
-  const userId = decoded.id;
   const posts = await postModel.find({ user: userId });
 
   res.status(200).json({
@@ -67,21 +36,6 @@ async function getPostController(req, res) {
 }
 
 async function getPostDetailsController(req, res) {
-  const token = req.cookies.token;
-  if (!token) {
-    return res.status(401).json({
-      message: "unauthorised access",
-    });
-  }
-  let decoded;
-  try {
-    decoded = jwt.verify(token, process.env.JWT_SECRET);
-  } catch (error) {
-    return res.status(401).json({
-      message: "Invalid token",
-    });
-  }
-  let userId = decoded.id;
   let postId = req.params.id;
 
   let post = await postModel.findById(postId);
