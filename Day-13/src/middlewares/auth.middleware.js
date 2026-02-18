@@ -15,7 +15,8 @@ async function identifyUser(req, res, next) {
       message: "token invalid",
     });
   }
-  req.userId = decoded.id;
+  req.user = decoded;
+  next();
 }
 
 module.exports = identifyUser;

@@ -29,9 +29,13 @@ async function registerController(req, res) {
     profileImage,
   });
 
-  const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-    expiresIn: "1d",
-  });
+  const token = jwt.sign(
+    { id: user._id, username: user.username },
+    process.env.JWT_SECRET,
+    {
+      expiresIn: "1d",
+    },
+  );
   res.cookie("token", token);
 
   res.status(201).json({
@@ -61,7 +65,10 @@ async function loginController(req, res) {
     });
   }
 
-  const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+  const token = jwt.sign(
+    { id: user._id, username: user.username },
+    process.env.JWT_SECRET,
+  );
   res.cookie("token", token);
   res.status(200).json({
     message: "user logged in successfully",

@@ -3,6 +3,7 @@ const {
   createPostController,
   getPostController,
   getPostDetailsController,
+  likePostController,
 } = require("../controllers/post.controller");
 
 const postRouter = express.Router();
@@ -18,5 +19,6 @@ postRouter.post(
 );
 postRouter.get("/", identifyUser, getPostController);
 postRouter.get("/details/:id", identifyUser, getPostDetailsController);
+postRouter.post("/like/:postId",identifyUser,likePostController)
 
 module.exports = postRouter;
