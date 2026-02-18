@@ -9,4 +9,5 @@ const userRouter = express.Router();
 userRouter.post("/follow/:username", identifyUser, followUserController);
 userRouter.post("/unfollow/:username", identifyUser, unfollowUserController);
 
+
 module.exports = userRouter;

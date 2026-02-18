@@ -86,7 +86,6 @@ async function likePostController(req, res) {
 }
 
 
-
 module.exports = {
   createPostController,
   getPostController,

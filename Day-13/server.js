@@ -6,4 +6,5 @@ app.listen(process.env.PORT || 3000, () => {
   console.log(`server started at ${process.env.PORT}`);
 });
 
+
 connectToDb();

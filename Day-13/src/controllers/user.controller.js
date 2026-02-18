@@ -59,13 +59,14 @@ async function unfollowUserController(req, res) {
     });
   }
 
-  const unfollowRecord = await followModel.findByIdAndDelete(isUserFollowing._id);
+  const unfollowRecord = await followModel.findByIdAndDelete(
+    isUserFollowing._id,
+  );
 
-res.status(200).json({
-  message: `You have unfollowed ${followeeUsername}`,unfollowRecord
-})
-
-
+  res.status(200).json({
+    message: `You have unfollowed ${followeeUsername}`,
+    unfollowRecord,
+  });
 }
 
 module.exports = { followUserController, unfollowUserController };
