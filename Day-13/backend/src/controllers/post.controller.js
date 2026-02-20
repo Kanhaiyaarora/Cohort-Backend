@@ -74,6 +74,16 @@ async function likePostController(req, res) {
     });
   }
 
+  const isAlreadyLiked = await likeModel.findOne({
+    post: postId,
+    user: username,
+  });
+  if(isAlreadyLiked){
+    return res.status(200).json({
+      message: "You already liked this post."
+    })
+  }
+
   const like = await likeModel.create({
     post: postId,
     user: username,
@@ -84,7 +94,6 @@ async function likePostController(req, res) {
     like,
   });
 }
-
 
 module.exports = {
   createPostController,
