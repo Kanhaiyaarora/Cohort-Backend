@@ -103,7 +103,7 @@ main {
     }
 
     // =======================
-    // Button
+    // Submit Button
     // =======================
     button {
       padding: 0.9rem;
@@ -115,6 +115,7 @@ main {
       font-weight: 500;
       cursor: pointer;
       transition: 0.3s ease;
+      margin-bottom: 1rem;
 
       &:hover {
         background: #4338ca;
@@ -125,5 +126,13 @@ main {
         transform: scale(0.97);
       }
     }
+  }
+  p {
+    color: rgb(128, 127, 127);
+  }
+  .toggleAuthForm {
+    color: #4f46e5;
+    cursor: pointer;
+    text-decoration: none;
   }
 }
