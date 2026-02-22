@@ -1,35 +1,39 @@
 import React, { useState } from 'react'
 import { Eye, EyeOff } from 'lucide-react'
 import '../style/form.scss'
-import { Link } from 'react-router'
-import axios from 'axios'
+import { Link, useNavigate } from 'react-router'
+import { useAuth } from '../hooks/useAuth'
 
 const Login = () => {
 
   const [showPassword, setShowPassword] = useState(false)
   const [rememberMe, setRememberMe] = useState(false)
-
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
 
-  function handleSubmit(e) {
+
+
+  const { loading, handleLogin } = useAuth()
+  const navigate = useNavigate()
+
+
+
+  const handleSubmit = async (e) => {
     e.preventDefault()
 
-    axios.post("http://localhost:3000/api/auth/login", { username, password }, { withCredentials: true }).then(res => {
-      console.log(res.data);
+    await handleLogin(username, password, rememberMe)
 
-      const token = res.data.token
-
-      if (rememberMe) {
-        localStorage.setItem("token", token)
-      } else {
-        sessionStorage.setItem("token", token)
-      }
-    })
-
-
+    navigate('/')
+    
 
   }
+
+  if (loading) {
+    return (<main>
+      <h1>Loading.....</h1>
+    </main>)
+  }
+
 
   return (
     <main>
@@ -51,10 +55,7 @@ const Login = () => {
               placeholder='Enter password'
             />
 
-            <span
-              className="toggle-icon"
-              onClick={() => setShowPassword(!showPassword)}
-            >
+            <span className="toggle-icon" onClick={() => setShowPassword(!showPassword)}>
               {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
             </span>
           </div>
@@ -78,6 +79,10 @@ const Login = () => {
       </div>
     </main>
   )
+
+
 }
+
+
 
 export default Login
