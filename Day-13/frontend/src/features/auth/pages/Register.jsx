@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Eye, EyeOff } from 'lucide-react'
-import { Link } from 'react-router'
-import axios from 'axios'
+import { Link, useNavigate } from 'react-router'
+import { useAuth } from '../hooks/useAuth'
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false)
@@ -9,13 +9,18 @@ const Register = () => {
   const [username, setUsername] = useState(null)
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const navigate = useNavigate()
 
-  async function handleSubmit(e) {
+  const { loading, handleRegister } = useAuth()
+
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    axios.post('http://localhost:3000/api/auth/register', { username, email, password }, { withCredentials: true }).then(res => {
-      console.log(res.data);
-    })
+    await handleRegister(username, email, password)
+    navigate('/')
+  }
 
+  if (loading) {
+    return (<main> <h1>Loading.....</h1></main>)
   }
 
   return (
