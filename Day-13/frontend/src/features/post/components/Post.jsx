@@ -16,7 +16,7 @@ const Post = ({ user, post }) => {
       <img src={post.imageUrl} alt="post-url" />
       <div className="icons">
         <div className="left">
-          <button><Heart /> </button>
+          <button><Heart className={post.isLiked ? "like" : ""} /> </button>
           <button><MessageCircle /> </button>
           <button><Send /> </button>
         </div>
