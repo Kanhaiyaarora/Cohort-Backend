@@ -1,0 +1,136 @@
+// ===== RESET =====
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.feed-page {
+  background: #0f0f14;
+  // min-height: 100vh;
+  height: 100%;
+  padding: 40px 15px;
+}
+
+// ===== FEED WRAPPER =====
+.feed {
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto; // 👈 Center horizontally only
+}
+
+// ===== POSTS CONTAINER =====
+.posts {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+// ===== SINGLE POST =====
+.post {
+  background: #1a1a22;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid #2a2a35;
+  transition: transform 0.3s ease;
+
+  // ===== USER HEADER =====
+  .user {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px;
+
+    .img-wrapper {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      padding: 2px;
+      background: conic-gradient(
+        #feda75,
+        #fa7e1e,
+        #d62976,
+        #962fbf,
+        #4f5bd5,
+        #feda75
+      );
+
+      img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+        background: #fff;
+      }
+    }
+
+    p {
+      color: #fff;
+      font-weight: 600;
+      font-size: 14px;
+    }
+  }
+
+  // ===== POST IMAGE =====
+  > img {
+    width: 100%;
+    height: auto;
+    max-height: 500px;
+    object-fit: cover;
+  }
+
+  // ===== ICONS =====
+  .icons {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 14px;
+
+    .left,
+    .right {
+      display: flex;
+      gap: 16px;
+    }
+
+    button {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      color: #e4e4e7;
+      transition: 0.2s ease;
+
+      &:hover {
+        transform: scale(1.15);
+        color: #ff4d6d;
+      }
+
+      svg {
+        width: 22px;
+        height: 22px;
+      }
+    }
+  }
+
+  // ===== CAPTION =====
+  .bottom {
+    padding: 0 14px 14px;
+
+    .caption {
+      color: #cfcfd6;
+      font-size: 13.5px;
+      line-height: 1.5;
+    }
+  }
+}
+
+// ===== RESPONSIVE =====
+@media (max-width: 768px) {
+  .post > img {
+    max-height: 420px;
+  }
+}
+
+@media (max-width: 480px) {
+  .post > img {
+    max-height: 350px;
+  }
+}
