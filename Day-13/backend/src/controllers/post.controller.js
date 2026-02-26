@@ -78,9 +78,16 @@ async function likePostController(req, res) {
     post: postId,
     user: username,
   });
+
   if (isAlreadyLiked) {
+    const unlike = await likeModel.deleteOne({
+      post: postId,
+      user: username,
+    });
     return res.status(200).json({
-      message: "You already liked this post.",
+      message: "Post unliked successfully",
+      unlike,
+      liked: false,
     });
   }
 
@@ -91,6 +98,7 @@ async function likePostController(req, res) {
 
   res.status(200).json({
     message: "Post liked successfully",
+    liked: true,
     like,
   });
 }
