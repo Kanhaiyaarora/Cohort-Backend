@@ -2,7 +2,8 @@ import React from 'react'
 import { Bookmark, Heart, MessageCircle, Send } from 'lucide-react'
 
 
-const Post = ({ user, post }) => {
+const Post = ({ user, post, handleLike }) => {
+
   return (
     <div className="post">
       <div className="user">
@@ -16,7 +17,7 @@ const Post = ({ user, post }) => {
       <img src={post.imageUrl} alt="post-url" />
       <div className="icons">
         <div className="left">
-          <button><Heart className={post.isLiked ? "like" : ""} /> </button>
+          <button onClick={() => handleLike(post._id)}  ><Heart className={post.isLiked ? "like" : ""} /> </button>
           <button><MessageCircle /> </button>
           <button><Send /> </button>
         </div>
