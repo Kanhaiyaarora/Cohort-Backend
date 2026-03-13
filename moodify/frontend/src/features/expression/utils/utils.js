@@ -48,24 +48,23 @@ export const detect = ({ landmarkerRef, videoRef, setExpression }) => {
     const eyeSquintLeft = getScore("eyeSquintLeft");
     const eyeSquintRight = getScore("eyeSquintRight");
 
-    
-
     let currentExpression = "Neutral";
 
     if (smileLeft > 0.5 && smileRight > 0.5) {
-      currentExpression = "Happy 😄";
+      currentExpression = "happy";
     } else if (jawOpen > 0.2 && browUp > 0.2) {
-      currentExpression = "Surprised 😲";
+      currentExpression = "surprised";
     } else if (frownLeft > 0.01 && frownRight > 0.01) {
-      currentExpression = "Sad 😢";
+      currentExpression = "sad";
     } else if (
       browDownLeft > 0.4 &&
       browDownRight > 0.4 &&
       (eyeSquintLeft > 0.3 || eyeSquintRight > 0.3)
     ) {
-      currentExpression = "Angry 😡";
+      currentExpression = "angry";
     }
 
     setExpression(currentExpression);
+    return currentExpression;
   }
 };
