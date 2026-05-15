@@ -6,6 +6,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
+app.use(express.static("public"));
 
 app.get("/api/hello", (req, res) => {
   res.status(200).json({ message: "Hello World" });
@@ -23,6 +24,10 @@ app.get("/api/users", (req, res) => {
     { id: 4, name: "Rahul Gupta" },
   ];
   res.status(200).json(users);
+});
+
+app.get("*name", (req, res) => {
+  res.sendFile("public/index.html", { root: __dirname });
 });
 
 app.listen(3000, () => {
