@@ -37,13 +37,13 @@ export const registerController = async (req, res) => {
   user.refreshToken = refreshToken;
   await user.save();
 
-  res.cookies("accessToken", accessToken,{
+  res.cookies("accessToken", accessToken, {
     httpOnly: true,
     secure: false,
     sameSite: "lax",
     maxAge: 15 * 60 * 1000, // 15 minutes
   });
-  res.cookies("refreshToken", refreshToken,{
+  res.cookies("refreshToken", refreshToken, {
     httpOnly: true,
     secure: false,
     sameSite: "lax",
@@ -52,17 +52,16 @@ export const registerController = async (req, res) => {
 
   res.status(200).json({
     message: "user registered successfully.",
-    user:{
+    user: {
       id: user._id,
       username: user.username,
       email: user.email,
       refreshToken: user.refreshToken,
       accessToken: accessToken,
-      password: user.password
-    }
+      password: user.password,
+    },
   });
 };
-
 
 export const loginController = async (req, res) => {
   const { email, password } = req.body;
@@ -95,13 +94,13 @@ export const loginController = async (req, res) => {
   isUserExist.refreshToken = refreshToken;
   await isUserExist.save();
 
-  res.cookies("accessToken", accessToken,{
+  res.cookies("accessToken", accessToken, {
     httpOnly: true,
     secure: false,
     sameSite: "lax",
     maxAge: 15 * 60 * 1000, // 15 minutes
   });
-  res.cookies("refreshToken", refreshToken,{
+  res.cookies("refreshToken", refreshToken, {
     httpOnly: true,
     secure: false,
     sameSite: "lax",
@@ -110,13 +109,61 @@ export const loginController = async (req, res) => {
 
   res.status(200).json({
     message: "user logged in successfully.",
-    user:{
+    user: {
       id: isUserExist._id,
       username: isUserExist.username,
       email: isUserExist.email,
       refreshToken: isUserExist.refreshToken,
       accessToken: accessToken,
-      password: isUserExist.password
-    }
+      password: isUserExist.password,
+    },
+  });
+};
+
+export const getMeController = async (req, res) => {
+  res.status(200).json({
+    message: "user fetched successfully.",
+    user: req.user,
+  });
+};
+
+export const getAccessTokenController = async (req, res) => {
+  let refreshToken = req.cookies.refreshToken;
+
+  if (!refreshToken) {
+    return res.status(401).json({
+      message: "Unauthorized. No refresh token provided.",
+    });
+  }
+
+  let decoded = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET);
+
+  if (!decoded) {
+    return res.status(401).json({
+      message: "Unauthorized. Invalid refresh token.",
+    });
+  }
+
+  const user = await userModel.findById(decoded.id);
+
+  if (!user) {
+    return res.status(401).json({
+      message: "Unauthorized. Invalid refresh token.",
+    });
+  }
+
+  if (refreshToken !== user.refreshToken) {
+    return res.status(401).json({
+      message: "Unauthorized. Invalid refresh token.",
+    });
+  }
+
+  const accessToken = generateAccessToken(user);
+
+  res.cookie("accessToken", accessToken, {
+    httpOnly: true,
+    secure: false,
+    sameSite: "lax",
+    maxAge: "15 * 60 * 1000", // 15 minutes
   });
 };
