@@ -5,6 +5,7 @@ import {
   generateAccessToken,
   generateRefreshToken,
 } from "../utils/generateTokens.js";
+import jwt from "jsonwebtoken";
 
 export const registerController = async (req, res) => {
   const { username, email, password } = req.body;
@@ -37,13 +38,13 @@ export const registerController = async (req, res) => {
   user.refreshToken = refreshToken;
   await user.save();
 
-  res.cookies("accessToken", accessToken, {
+  res.cookie("accessToken", accessToken, {
     httpOnly: true,
     secure: false,
     sameSite: "lax",
     maxAge: 15 * 60 * 1000, // 15 minutes
   });
-  res.cookies("refreshToken", refreshToken, {
+  res.cookie("refreshToken", refreshToken, {
     httpOnly: true,
     secure: false,
     sameSite: "lax",
@@ -94,13 +95,13 @@ export const loginController = async (req, res) => {
   isUserExist.refreshToken = refreshToken;
   await isUserExist.save();
 
-  res.cookies("accessToken", accessToken, {
+  res.cookie("accessToken", accessToken, {
     httpOnly: true,
     secure: false,
     sameSite: "lax",
     maxAge: 15 * 60 * 1000, // 15 minutes
   });
-  res.cookies("refreshToken", refreshToken, {
+  res.cookie("refreshToken", refreshToken, {
     httpOnly: true,
     secure: false,
     sameSite: "lax",
@@ -164,6 +165,11 @@ export const getAccessTokenController = async (req, res) => {
     httpOnly: true,
     secure: false,
     sameSite: "lax",
-    maxAge: "15 * 60 * 1000", // 15 minutes
+    maxAge: 15 * 60 * 1000, // 15 minutes
+  });
+
+  res.status(200).json({
+    message: "Access token generated successfully.",
+    accessToken,
   });
 };
