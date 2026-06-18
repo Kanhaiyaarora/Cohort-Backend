@@ -21,12 +21,11 @@
 //  if amount 7001-9000 => 10% discount
 //  if amount > 9000 => 20% discount
 
-
 // function amountPayable(amount){
 //   if(amount > 0 && amount <= 5000){
 //     return amount * 1// 0% discount
 //   } else if(amount > 5000 && amount <= 7000){
-//     return amount * 0.95// 5% discount    
+//     return amount * 0.95// 5% discount
 //   }else if(amount > 7000 && amount <= 9000){
 //     return amount * 0.90// 10% discount
 //   }else if(amount > 9000){
@@ -55,7 +54,7 @@
 //     amount = amount + (units - 100) * 6
 //     units = 100
 //   }
-  
+
 //   amount = amount + units * 4.2
 //   return amount;
 // }
@@ -97,24 +96,47 @@
 
 // console.log(isStrongNumber(145));
 
+// ------------------------> <-----------------------
 
+// reverse a number
+
+// function reverseNumber(n) {
+//   let rev = 0
+
+//   while(n>0){
+//     rev = (rev * 10) + ( n % 10 )
+//     n = Math.floor(n/10);
+//   }
+//   return rev
+// }
+
+// console.log(reverseNumber(123))
 
 // ------------------------> <-----------------------
 
-// reverse a number 
+// ISBN number is a 10 digit number which is used to identify books. The last digit of the ISBN number is a check digit which is calculated using the first 9 digits of the ISBN number. The check digit is calculated using the following formula:
 
+// function isValidISBN(isbn) {
+//   let count = 0;
+//   while (isbn > 0) {
+//     isbn = Math.floor(isbn / 10);
+//     count++;
+//   }
+//   if (count != 10) {
+//     console.log("Invalid ISBN number");
+//   } else {
+//     let sum = 0;
+//     for (i = 10; i >= 1; i--) {
+//       sum += (isbn % 10) * i;
+//       isbn = Math.floor(isbn / 10);
+//     }
+//     if (sum % 11 == 0) {
+//       console.log("yes");
+//     } else console.log("No");
+//   }
+// }
 
-function reverseNumber(n) {
-  let rev = 0
-
-  while(n>0){
-    rev = (rev * 10) + ( n % 10 )
-    n = Math.floor(n/10);
-  }
-  return rev
-}
-
-console.log(reverseNumber(123))
-
+// isValidISBN(8175257660);
 
 // ------------------------> <-----------------------
+
