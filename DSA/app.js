@@ -62,10 +62,37 @@
 
 // console.log(bijlikabill(900));
 
+// ------------------------> <-----------------------
 
+// let i = 10;
+// while (i % 3 !== 0) {
+//     console.log(i);
+//     i--;
+// }
 
-let i = 10;
-while (i % 3 !== 0) {
-    console.log(i);
-    i--;
+// ------------------------> <-----------------------
+
+// Strong number is a number whose sum of factorial of digits is equal to the number itself.
+
+function isStrongNumber(n) {
+    function getFactorial(a){
+        let factorial = 1;
+        for(let i= 1; i<=a; i++){
+            factorial *= i
+        }
+        return factorial
+    }
+
+let temp = n;
+let sum = 0;
+while(temp > 0){
+    let digit = temp % 10
+    sum += getFactorial(digit)
+    temp = Math.floor(temp/10)
 }
+
+return sum === n ? "Yes": "No"
+
+}
+
+console.log(isStrongNumber(145));
