@@ -140,3 +140,20 @@
 
 // ------------------------> <-----------------------
 
+// Automorphic number is a number whose square ends with the same digits as the number itself. For example, 5 is an automorphic number because 5^2 = 25, which ends with 5. Similarly, 6 is an automorphic number because 6^2 = 36, which ends with 6.
+
+
+function isAutomorphic(n){
+  let copy = n
+  let count = 0;
+  while(n>0){
+    n= Math.floor(n/10)
+    count++
+  }
+let square = copy*copy
+if(square % Math.pow(10, count) == copy){
+  console.log("Automorphic number");
+} else console.log('not automorphic no.');
+}
+
+isAutomorphic(76)
