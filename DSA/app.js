@@ -163,53 +163,95 @@
 
 //  Linked List
 
-// class Node {
-//     constructor(val){
-//     this.data = val;
-//     this.next = null;
-//   }
-// }
+class Node {
+    constructor(val){
+    this.data = val;
+    this.next = null;
+  }
+}
 
-// class LL{
-//   constructor(){
-//     this.head = null;
-//     this.size = 0;
-//   }
+class LL{
+  constructor(){
+    this.head = null;
+    this.size = 0;
+  }
 
-//   insertAtFirst(val){
-//     this.size++
-//     let newNode = new Node(val)
-//     if(this.head == null){
-//       this.head = newNode
-//       return
-//     }
-//     newNode.next = this.head
-//     this.head = newNode
-//   }
-
-//   printLL(head){
-//       if(head == null){
-//         return console.log("Empty Linked List")
-//       }
-//       let temp = head;
-//       while(temp!= null){
-//         process.stdout.write(temp.data+ " ")
-//         temp = temp.next
-//       }
-//       console.log("null")
-// }
-
-// }
-
-// let obj = new LL()
-// obj.insertAtFirst(10)
-// obj.insertAtFirst(20)
-// obj.insertAtFirst(30)
-// obj.insertAtFirst(40)
-// obj.insertAtFirst(50)
-// obj.printLL(obj.head)
+  insertAtFirst(val){
+    this.size++
+    let newNode = new Node(val)
+    if(this.head == null){
+      this.head = newNode
+      return
+    }
+    newNode.next = this.head
+    this.head = newNode
+  }
 
 
+
+  insertAtLast(val){
+    this.size++;
+    let newNode = new Node(val)
+    if(this.head == null){
+      this.head = newNode
+      return
+    }
+    let temp = this.head
+    while(temp.next != null){
+      temp = temp.next
+    }
+    temp.next = newNode
+  }
+
+  deleteAtFirst(){
+      if(this.head == null){
+        console.log("can't be deleted")
+        return
+      }
+      this.size--
+      this.head = this.head.next
+  }
+
+  deleteAtLast(){
+    if(this.head == null){
+      console.log("Can not be deleted because LL is empty.")
+      return
+    }
+    let temp = this.head
+    this.size--
+    while(temp.next.next != null){
+      temp = temp.next
+    }
+    temp.next = null
+  }
+
+  printLL(head){
+      if(head == null){
+        return console.log("Empty Linked List")
+      }
+      let temp = head;
+      while(temp!= null){
+        process.stdout.write(temp.data+ " ")
+        temp = temp.next
+      }
+      console.log("null")
+}
+
+}
+
+let obj = new LL()
+obj.insertAtFirst(10)
+obj.insertAtFirst(20)
+obj.insertAtFirst(30)
+obj.insertAtFirst(40)
+obj.insertAtFirst(50) 
+obj.printLL(obj.head)
+obj.deleteAtLast()
+obj.printLL(obj.head) 
+obj.insertAtLast(60)
+obj.printLL(obj.head) 
+obj.deleteAtFirst() 
+obj.printLL(obj.head) 
 
 
 
