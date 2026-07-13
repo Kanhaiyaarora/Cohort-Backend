@@ -254,6 +254,15 @@ class LL{
       temp = temp.next
     }
   }
+// Slow & Fast Algorithm -- 1st pointer runs 1 step & 2nd pointer run 2 step
+  middleOfLLSFA(){
+    let slow = this.head,fast = this.head
+    while(fast != null && fast.next!= null){
+      slow = slow.next
+      fast = fast.next.next
+    }
+    return slow
+  }
 
   printLL(head){
       if(head == null){
@@ -284,8 +293,8 @@ obj.insertAtFirst(50)
 // obj.printLL(obj.head)
 obj.insertAtPosition(69,5) 
 obj.printLL(obj.head) 
-obj.middleOfLL()
-
+// obj.middleOfLL() 
+obj.middleOfLLSFA()
 
 
 
