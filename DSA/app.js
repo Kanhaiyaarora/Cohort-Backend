@@ -203,6 +203,21 @@ class LL{
     temp.next = newNode
   }
 
+  insertAtPosition(val,pos){
+    if(pos<=0 || pos > this.size+1){
+      console.log("nhi ho skta")
+      return
+    }
+    this.size++
+    let temp = this.head
+    let newNode = new Node(val)
+    for(let i =1;i<=pos-2;i++){
+        temp = temp.next
+    }
+    newNode.next = temp.next
+    temp.next = newNode
+  }
+
   deleteAtFirst(){
       if(this.head == null){
         console.log("can't be deleted")
@@ -225,6 +240,21 @@ class LL{
     temp.next = null
   }
 
+  middleOfLL(){
+    if(this.head==null){
+      console.log("empty LL")
+      return
+    }
+    let temp = this.head;
+    for(let i=1;i<=Math.floor(this.size/2);i++){
+      temp = temp.next
+    }
+    while(temp != null){
+      process.stdout.write(temp.data+ " ")
+      temp = temp.next
+    }
+  }
+
   printLL(head){
       if(head == null){
         return console.log("Empty Linked List")
@@ -245,14 +275,16 @@ obj.insertAtFirst(20)
 obj.insertAtFirst(30)
 obj.insertAtFirst(40)
 obj.insertAtFirst(50) 
-obj.printLL(obj.head)
-obj.deleteAtLast()
+// obj.printLL(obj.head)
+// obj.deleteAtLast()
+// obj.printLL(obj.head) 
+// obj.insertAtLast(60)
+// obj.printLL(obj.head) 
+// obj.deleteAtFirst() 
+// obj.printLL(obj.head)
+obj.insertAtPosition(69,5) 
 obj.printLL(obj.head) 
-obj.insertAtLast(60)
-obj.printLL(obj.head) 
-obj.deleteAtFirst() 
-obj.printLL(obj.head) 
-
+obj.middleOfLL()
 
 
 
