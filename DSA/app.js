@@ -264,6 +264,18 @@ class LL{
     return slow
   }
 
+reverseLL(){
+  console.log(this.head)
+  let current = this.head,prev = null;
+  while(current != null){
+    let temp = current.next;
+    current.next = prev;
+    prev = current;
+    current = temp
+  }
+  return prev;
+}
+
   printLL(head){
       if(head == null){
         return console.log("Empty Linked List")
@@ -284,17 +296,18 @@ obj.insertAtFirst(20)
 obj.insertAtFirst(30)
 obj.insertAtFirst(40)
 obj.insertAtFirst(50) 
-// obj.printLL(obj.head)
+// obj.printLL(obj.head) 
 // obj.deleteAtLast()
 // obj.printLL(obj.head) 
 // obj.insertAtLast(60)
 // obj.printLL(obj.head) 
 // obj.deleteAtFirst() 
 // obj.printLL(obj.head)
-obj.insertAtPosition(69,5) 
-obj.printLL(obj.head) 
+// obj.insertAtPosition(69,5) 
+// obj.printLL(obj.head) 
 // obj.middleOfLL() 
-obj.middleOfLLSFA()
+// obj.middleOfLLSFA() 
+console.log(obj.reverseLL())
 
 
 
