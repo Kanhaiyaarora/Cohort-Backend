@@ -10,13 +10,11 @@ const PaginationButton = ({ totalPost, postPerPage, setCurrentPage }) => {
   }
 
 
-  console.log(totalPost)
   return (
     <div>
       {
-        pages.map((page) => (
-          <button onClick={() => setCurrentPage(page)} key={page.id} style={{ margin: "1rem", padding: "1rem" }}>{page}</button>
-
+        pages.map((page, idx) => (
+          <button key={page} onClick={() => setCurrentPage(page)} style={{ margin: "1rem", padding: "1rem" }}>{page}</button>
         ))
       }
     </div>
